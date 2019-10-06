@@ -8,8 +8,8 @@ import java.io.FileNotFoundException;
 public class Main {
     public static void main(String[] args) {
         try {
-            String fileName = "files/rustih(1).xml";
-            Integer index = 9;
+            String fileName = "FILENAME";
+            Integer index = 0;
             File fileXml = new File(fileName);
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
