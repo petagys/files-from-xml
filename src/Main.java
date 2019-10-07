@@ -8,17 +8,12 @@ import java.io.FileNotFoundException;
 public class Main {
     public static void main(String[] args) {
         try {
-            String fileName = "FILENAME";
-            Integer index = 0;
-            File fileXml = new File(fileName);
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(fileXml);
-            doc.getDocumentElement().normalize();
-            NodeList lst = doc.getChildNodes();
-            String data;
-            Element child = (Element) lst.item(0).getChildNodes().item(index);
-            System.out.println(child.getFirstChild().getNodeValue());
+            final String TAGNAME = "text";
+            String fileName = "files/rustih(1).xml";
+            String text;
+            XmlRead xml = new XmlRead(fileName, TAGNAME);
+            text = xml.getTextFromTag();
+            System.out.println(text);
         } catch (Exception e){
             System.out.println(e);
         }
