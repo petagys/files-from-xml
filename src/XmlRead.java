@@ -9,22 +9,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 
-public class XmlRead {
-    String fileName;
+public class XmlRead{
     String tagName;
+    String fileName;
 
-    public XmlRead(){}
-
-    public XmlRead(String fileName, String tagName){
+    public XmlRead(String tagName, String fileName) {
         this.tagName = tagName;
-        this.fileName = fileName;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
@@ -34,6 +24,14 @@ public class XmlRead {
 
     public void setTagName(String tagName) {
         this.tagName = tagName;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public Document parseXml() throws ParserConfigurationException, IOException, SAXException {
