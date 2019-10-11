@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class UserData {
     String path;
+    List<String> fileNames = null;
 
     public UserData(){}
     public UserData(String path) {
@@ -20,12 +21,22 @@ public class UserData {
         this.path = path;
     }
 
-    public void getData(){
+    public List<String> getData(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the directory with xml files: ");
+        System.out.println("Enter the path of directory with xml files: ");
         String path = sc.nextLine();
         setPath(path);
-        System.out.println("In directory '"+ getPath() + "' founded " + readDirectory(path).size() + " files!");
+        fileNames = readDirectory(path);
+        System.out.println("In directory '"+ getPath() + "' founded " + fileNames.size() + " files!");
+        System.out.println("Do you want to continue? yes/no");
+        String answer = sc.nextLine();
+        if ((answer.toLowerCase().equals("yes")) || (answer.toLowerCase().equals("y"))){
+            return fileNames;
+        } else {
+            System.exit(0);
+        }
+        System.exit(0);
+        return null;
     }
 
     public List<String> readDirectory(String path){
@@ -33,14 +44,14 @@ public class UserData {
             File dir = new File(path);
             File []arrFiles = dir.listFiles();
             List<File> lst = Arrays.asList(arrFiles);
-            List<String> fileNames = new ArrayList<String>();
+            List<String> fileNames = new ArrayList<>();
             for (File file : lst){
-                fileNames.add(file.getName());
+                fileNames.add(path + "\\" + file.getName());
             }
             return fileNames;
         } catch (java.lang.NullPointerException e){
             System.out.println("Wrong directory! Please, try again..");
-            System.out.println("Do yo wanna try again ? Enter yes/no:");
+            System.out.println("Do yo wanna try again ? yes/no:");
             Scanner sc = new Scanner(System.in);
             String data = sc.nextLine();
             if ((data.toLowerCase().equals("yes")) || (data.toLowerCase().equals("y"))){
@@ -50,6 +61,12 @@ public class UserData {
             }
             System.exit(0);
             return null;
+        }
+    }
+
+    public void printFiles(){
+        for (String file : fileNames){
+            System.out.println(file);
         }
     }
 

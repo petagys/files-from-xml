@@ -1,3 +1,4 @@
+import jdk.nashorn.internal.runtime.regexp.joni.exception.ErrorMessages;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -10,9 +11,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class XmlRead{
-    String tagName;
-    String fileName;
+    String tagName = null;
+    String fileName = null;
+    String data = null;
 
+    public XmlRead(){}
     public XmlRead(String tagName, String fileName) {
         this.tagName = tagName;
         this.fileName = fileName;
@@ -35,6 +38,10 @@ public class XmlRead{
     }
 
     public Document parseXml() throws ParserConfigurationException, IOException, SAXException {
+        if (fileName == null){
+            System.out.println("XmlRead.java: parseXml() file name can not be null!");
+            System.exit(1);
+        }
         File fileXml = new File(fileName);
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
@@ -43,12 +50,14 @@ public class XmlRead{
         return doc;
     }
 
-    public String getTextFromTag() throws IOException, SAXException, ParserConfigurationException {
+    public void getTextFromTag() throws IOException, SAXException, ParserConfigurationException {
+        if (tagName == null){
+            System.out.println("XmlRead.java: getTextFromTag() tag name can not be null!");
+            System.exit(1);
+        }
         Document document = parseXml();
         NodeList lst = document.getElementsByTagName(tagName);
-        String data;
         Element child = (Element) lst.item(0);
         data = child.getFirstChild().getNodeValue();
-        return data;
     }
 }
