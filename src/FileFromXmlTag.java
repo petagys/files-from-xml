@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class FileFromXmlTag {
     public static void main(String[] args) {
         try {
             int count = 1;
