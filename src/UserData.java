@@ -27,7 +27,7 @@ public class UserData {
         String path = sc.nextLine();
         setPath(path);
         fileNames = readDirectory(path);
-        System.out.println("In directory '"+ getPath() + "' founded " + fileNames.size() + " files!");
+        System.out.println("In directory '"+ getPath() + "' founded " + fileNames.size() + "xml files!");
         System.out.println("Do you want to continue? yes/no");
         String answer = sc.nextLine();
         if ((answer.toLowerCase().equals("yes")) || (answer.toLowerCase().equals("y"))){
@@ -46,7 +46,13 @@ public class UserData {
             List<File> lst = Arrays.asList(arrFiles);
             List<String> fileNames = new ArrayList<>();
             for (File file : lst){
-                fileNames.add(path + "\\" + file.getName());
+                if (file.getName().endsWith(".xml")){
+                    fileNames.add(path + "\\" + file.getName());
+                }
+            }
+            if (fileNames.size() == 0){
+                System.out.println("In the directory '" + path + "' no xml files founded!");
+                System.exit(0);
             }
             return fileNames;
         } catch (java.lang.NullPointerException e){
