@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
 public class FileFromXmlTag {
+    final static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
         try {
             int count = 1;
-            Scanner sc = new Scanner(System.in);
             System.out.println("Enter the tag name of xml file that from you want to create file: ");
             final String TAGNAME = sc.nextLine();
 

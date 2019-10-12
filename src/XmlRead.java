@@ -50,13 +50,18 @@ public class XmlRead{
     }
 
     public void getTextFromTag() throws IOException, SAXException, ParserConfigurationException {
-        if (tagName == null){
-            System.out.println("XmlRead.java: getTextFromTag() tag name can not be null!");
-            System.exit(1);
+        try {
+            if (tagName == null){
+                System.out.println("XmlRead.java: getTextFromTag() tag name can not be null!");
+                System.exit(1);
+            }
+            Document document = parseXml();
+            NodeList lst = document.getElementsByTagName(tagName);
+            Element child = (Element) lst.item(0);
+            data = child.getFirstChild().getNodeValue();
+        } catch (Exception e){
+            System.out.println("Wrong tag! Please, try again..");
+            System.exit(0);
         }
-        Document document = parseXml();
-        NodeList lst = document.getElementsByTagName(tagName);
-        Element child = (Element) lst.item(0);
-        data = child.getFirstChild().getNodeValue();
     }
 }

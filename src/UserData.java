@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,14 +23,13 @@ public class UserData {
     }
 
     public List<String> getData(){
-        Scanner sc = new Scanner(System.in);
         System.out.println("Enter the path of directory with xml files: ");
-        String path = sc.nextLine();
+        String path = FileFromXmlTag.sc.nextLine();
         setPath(path);
         fileNames = readDirectory(path);
         System.out.println("In directory '"+ getPath() + "' founded " + fileNames.size() + "xml files!");
         System.out.println("Do you want to continue? yes/no");
-        String answer = sc.nextLine();
+        String answer = FileFromXmlTag.sc.nextLine();
         if ((answer.toLowerCase().equals("yes")) || (answer.toLowerCase().equals("y"))){
             return fileNames;
         } else {
@@ -45,26 +45,18 @@ public class UserData {
             File []arrFiles = dir.listFiles();
             List<File> lst = Arrays.asList(arrFiles);
             List<String> fileNames = new ArrayList<>();
-            for (File file : lst){
-                if (file.getName().endsWith(".xml")){
+            for (File file : lst) {
+                if (file.getName().endsWith(".xml")) {
                     fileNames.add(path + "\\" + file.getName());
                 }
             }
-            if (fileNames.size() == 0){
+            if (fileNames.size() == 0) {
                 System.out.println("In the directory '" + path + "' no xml files founded!");
-                System.exit(0);
-            }
+                throw new FileNotFoundException();
+            };
             return fileNames;
-        } catch (java.lang.NullPointerException e){
+        } catch (Exception e){
             System.out.println("Wrong directory! Please, try again..");
-            System.out.println("Do yo wanna try again ? yes/no:");
-            Scanner sc = new Scanner(System.in);
-            String data = sc.nextLine();
-            if ((data.toLowerCase().equals("yes")) || (data.toLowerCase().equals("y"))){
-                this.getData();
-            } else {
-                System.exit(0);
-            }
             System.exit(0);
             return null;
         }
