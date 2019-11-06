@@ -7,3 +7,4 @@ To run the application just run *FileFromXmlTag* java main class and put some in
 5. Finally, in directory with project, will be created folder ***'txt_files'***
 
 If bugs appear, please write back. Hope you enjoy it!
+
